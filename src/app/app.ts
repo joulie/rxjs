@@ -36,6 +36,7 @@ export class App implements OnInit {
       tap(item => console.log(item)),
       //take(3) : prend les 3 premiers éléments du flux, donc ici tous les éléments (4, 8, 12).
       take(3)
+      // les autres opérateurs peuvent etre trouvés dans https://rxjs.dev/guide/overview aller dans reference
     ).subscribe({
       next: item => console.log(`Transformed item: ${item}`)});
   }
