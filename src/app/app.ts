@@ -1,6 +1,6 @@
 import { Component, OnInit, signal, VERSION } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {of, from} from 'rxjs';
+import {of, from, map, tap, take} from 'rxjs';
 
 
 @Component({
@@ -28,5 +28,15 @@ export class App implements OnInit {
       error: err => console.error('Error:', err),
       complete: () => console.log('Completed of()')
     });
+
+    of(2, 4, 6).pipe(
+      //map(item => item * 2) : multiplie chaque élément par 2 → les valeurs deviennent 4, 8, 12.
+      map(item => item * 2),
+      //tap(item => console.log(item)) : affiche chaque élément dans la console sans le modifier. C’est utile pour le débogage.
+      tap(item => console.log(item)),
+      //take(3) : prend les 3 premiers éléments du flux, donc ici tous les éléments (4, 8, 12).
+      take(3)
+    ).subscribe({
+      next: item => console.log(`Transformed item: ${item}`)});
   }
 }
